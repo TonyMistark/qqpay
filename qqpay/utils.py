@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 from __future__ import absolute_import, unicode_literals
 import six
 import six.moves.urllib.parse as urlparse
@@ -6,6 +8,7 @@ import string
 import random
 import hashlib
 import copy
+import socket
 
 try:
     '''Use simplejson if we can, fallback to json otherwise.'''
@@ -157,6 +160,7 @@ def calculate_signature(params, api_key):
     url = format_url(params, api_key)
     return to_text(hashlib.md5(url).hexdigest().upper())
 
+
 def dict_to_xml(d, sign):
     xml = ['<xml>\n']
     for k in sorted(d):
@@ -170,3 +174,19 @@ def dict_to_xml(d, sign):
             )
     xml.append('<sign><![CDATA[{0}]]></sign>\n</xml>'.format(to_text(sign)))
     return ''.join(xml)
+
+
+def get_external_ip():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        wechat_ip = socket.gethostbyname('api.mch.weixin.qq.com')
+        sock.connect((wechat_ip, 80))
+        addr, port = sock.getsockname()
+        sock.close()
+        return addr
+    except socket.error:
+        return '127.0.0.1'
+
+
+def get_md5(input_str):
+    return hashlib.md5(input_str).hexdigest()

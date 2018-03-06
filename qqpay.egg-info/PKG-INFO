@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: qqpay
+Version: 1.0.0
+Summary: Qqpay: Qqpay SDK for Python
+Home-page: git@github.com:TonyMistark/qqpay.git
+Author: ice
+Author-email: ice@kaiheikeji.com
+License: UNKNOWN
+Description: Qqpay: Qqpay SDK for Python
+Keywords: qqpay,qpay,Qpay
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
