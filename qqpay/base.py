@@ -32,7 +32,7 @@ class Base(object):
 
     def _request(self, method, url_or_endpoint, **kwargs):
         if not url_or_endpoint.startswith('https://'):
-            api_base_url = kwargs.pop('api_base_url', self._api_base_url)
+            api_base_url = kwargs["data"].pop('api_base_url', self._api_base_url)
             url = f"{api_base_url}{url_or_endpoint}"
         else:
             url = url_or_endpoint

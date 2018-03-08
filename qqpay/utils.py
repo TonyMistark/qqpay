@@ -9,6 +9,8 @@ import random
 import hashlib
 import copy
 import socket
+import base64
+import hmac
 
 try:
     '''Use simplejson if we can, fallback to json otherwise.'''
@@ -161,6 +163,15 @@ def calculate_signature(params, api_key):
     return to_text(hashlib.md5(url).hexdigest().upper())
 
 
+def hmac_sha1(key, msg=None):
+    """hmac-sha1 加密"""
+    return base64.b64encode(hmac.new(key, msg=msg, digestmod=hashlib.sha1).digest())
+
+
+def calculate_signature_hmac_sha1(params, api_key):
+    return hmac_sha1(format_url(params, api_key))
+
+
 def dict_to_xml(d, sign):
     xml = ['<xml>\n']
     for k in sorted(d):
@@ -189,4 +200,4 @@ def get_external_ip():
 
 
 def get_md5(input_str):
-    return hashlib.md5(input_str).hexdigest()
+    return hashlib.md5(input_str.encode("utf-8")).hexdigest()

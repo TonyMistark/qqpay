@@ -81,7 +81,7 @@ class Qpay(Base):
         return self.post(url="cgi-bin/pay/qpay_close_order.cgi", data=data)
 
     def refund(self, out_refund_no, refund_fee, op_user_id, op_user_passwd, transaction_id=None,
-               out_trade_no=None,  refund_account=None, **kwargs):
+               out_trade_no=None,  refund_account=None, api_base_url="https://api.qpay.qq.com/", **kwargs):
         """
         申请退款
         :param out_refund_no: 商户退款单号 商户系统内部的退款单号，商户系统内部唯一，同一退款单号多次请求只退一笔
@@ -91,6 +91,7 @@ class Qpay(Base):
         :param op_user_id: 操作员ID 操作员帐号, 默认为商户号
         :param op_user_passwd: 操作员密码 只需传密码，底层已做MD5转换
         :param refund_account: 退款资金来源 EFUND_SOURCE_UNSETTLED_FUNDS---未结算资金退款（默认使用未结算资金退款
+        :param api_base_url: base url
         :return:
         """
         assert (transaction_id is not None) or (out_trade_no is not None), \
@@ -107,6 +108,8 @@ class Qpay(Base):
             data["out_trade_no"] = out_trade_no
         if refund_account:
             data["refund_account"] = refund_account
+        if api_base_url:
+            data["api_base_url"] = api_base_url
         data.update(kwargs)
         return self.post(url="cgi-bin/pay/qpay_refund.cgi", data=data)
 
