@@ -33,7 +33,7 @@ cmdclass = {}
 # PACKAGES = [NAME] + ["%s.%s" % (NAME, i) for i in find_packages(NAME)]
 
 setup(
-    name='qqpay-ptyhon-sdk',
+    name='qqpay-python-sdk',
     version='0.0.1',
     author='ice',
     author_email='ice@kaiheikeji.com',
